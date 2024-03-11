@@ -1,0 +1,10 @@
+flask
+openai
+PyPDF2
+pypdf
+pymupdf
+langchain
+langchain-community
+langchain_openai
+tiktoken
+chromadb
