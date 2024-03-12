@@ -6,10 +6,10 @@ import pandas as pd
 from settings import settings
 import os 
 
-if settings.MODE == "production":
-    HOST = 'backend'
-else:
+if settings.MODE == "debug":
     HOST = 'localhost'
+else:
+    HOST = 'backend'
 
 def main_commandline():
 

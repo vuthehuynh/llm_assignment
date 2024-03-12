@@ -5,10 +5,10 @@ import requests
 import pandas as pd
 from settings import settings
 
-if settings.MODE == "production":
-    HOST = 'backend'
-else:
+if settings.MODE == "debug":
     HOST = 'localhost'
+else:
+    HOST = 'backend'
 
 def main_webui():
     # For upload file pdf to server though api /upload_file which is defined in server/simple_server.py
