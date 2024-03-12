@@ -14,7 +14,7 @@ def main_webui():
     # For upload file pdf to server though api /upload_file which is defined in server/simple_server.py
     user_id = st.text_input("User ID")
 
-    streamlit_pdf = st.file_uploader("Upload a CSV file", type=["pdf"])
+    streamlit_pdf = st.file_uploader("Upload a PDF user manual", type=["pdf"])
     if streamlit_pdf is not None:
         # For demonstration, assuming server expects multipart/form-data
         files = {'file': (streamlit_pdf.name, streamlit_pdf, 'application/pdf')}
@@ -39,7 +39,8 @@ def main_webui():
         response, user_history = send_to_flask(data)
         st.write(f"{response}")
 
-        # st.write(f"History of {user_id}:{user_history}")
+        with st.expander("History"):
+            st.write(f"History of {user_id}:{user_history}")
 
 
 def send_to_flask(data):
