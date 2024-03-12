@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 4000
 # Run the Flask app
-ENTRYPOINT ["streamlit", "run", "simple_frontend.py", "--server.port=4000", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=4000", "--server.address=0.0.0.0"]
