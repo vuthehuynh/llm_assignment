@@ -4,6 +4,7 @@ import streamlit as st
 import requests
 import pandas as pd
 from settings import settings
+from pathlib import Path 
 import os 
 
 if settings.MODE == "debug":
@@ -31,7 +32,7 @@ def main_commandline():
     # st.write(f"Processing {command_line}")
     if st.button("Run"):
         if "upload_file" in command_line:
-            file_path = command_data[-1]
+            file_path = Path(command_data[-1])
             if os.path.exists(file_path):
                 st.write("File exists")
                 with open(file_path, "rb") as f:
