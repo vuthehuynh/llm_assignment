@@ -1,8 +1,6 @@
 # Use an official Python runtime as the base image
 FROM python:3.8-slim
 
-# ENV OPENAI_API_KEY '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'
-# ENV OPENAI_API_KEY
 # Set the working directory in the container
 WORKDIR /app
 
