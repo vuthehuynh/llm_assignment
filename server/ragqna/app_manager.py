@@ -49,12 +49,7 @@ class AppManager:
         prompt = QnAInput.prompt
         pdf_path = QnAInput.pdf_path
         user_id = QnAInput.user_id
-
-        print(f'###################### User_id :{user_id}. Len history:{len(user_histories)}')
-        # Read the contents of the PDF file
-        # pdf_content = extract_text_from_pdf(pdf_path)
-        # pdf_content = extract_text_from_pdf_test(pdf_path)
-
+        print(f"prompt: {prompt}, pdf_path: {pdf_path}, user_id: {user_id}")
         # Load pdf content using langchain
         loader = PyPDFLoader(file_path=pdf_path)
         document_content = loader.load()

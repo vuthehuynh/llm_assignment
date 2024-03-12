@@ -9,10 +9,6 @@ bp = Blueprint('chat', __name__)
 
 @bp.route('/chat', methods=['POST'])
 async def chat_handle():
-    # prompt = request.form.get('prompt')
-    # pdf_path = request.form.get('pdf_path')
-    # user_id = request.form.get('user_id')
-    # data = **request.form
-    inputdata = QnAInput.parse_obj(request.form)
+    inputdata = QnAInput.parse_obj(dict(request.form))
     response = await raq_qna_service.chat(inputdata)
     return response

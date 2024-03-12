@@ -39,7 +39,7 @@ def main_webui():
         response, user_history = send_to_flask(data)
         st.write(f"{response}")
 
-        st.write(f"History of {user_id}:{user_history}")
+        # st.write(f"History of {user_id}:{user_history}")
 
 
 def send_to_flask(data):
