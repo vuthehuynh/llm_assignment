@@ -17,7 +17,7 @@ def main_commandline():
     st.markdown("""
     ###### Command lists    
     - `set_user_id <user_id>`: Set the user ID to `<user_id>`.
-    - `upload_file <file_path>`: Upload the file located at `<file_path>`.
+    - `upload_file: Start uploading the file.
     - `query <query_info>`: Upload the file located at `<file_path>`.
     """)
 
@@ -72,10 +72,10 @@ def main_commandline():
                 user_id = "1"
                 st.session_state["user_id"] = user_id
 
-            user_input = command_data[-1]
+            user_input = command_line.split("query")
             data = {
                'user_id': (None, user_id),
-               'prompt': (None, user_input),
+               'prompt': (None, user_input[1]),
                'pdf_path': (None, filename)
             }
             response, user_history = send_to_flask(data)
