@@ -8,3 +8,5 @@ langchain-community
 langchain_openai
 tiktoken
 chromadb
+pydantic
+pydantic-settings
