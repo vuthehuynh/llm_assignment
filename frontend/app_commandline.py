@@ -23,29 +23,38 @@ def main_commandline():
 
     ## Command line 
     st.markdown("--- ")
+    if not "file_upload_visibility" in st.session_state:
+        file_upload_visibility = False
+    else:
+        file_upload_visibility = True
+        file_upload_visibility = st.session_state["file_upload_visibility"]
+
+    # st.write(file_upload_visibility)
+    my_expander = st.expander("Expander", expanded=file_upload_visibility)
+    with my_expander:
+        streamlit_pdf = st.file_uploader("Upload a PDF user manual", type=["pdf"])
     command_line = st.text_input("Command line")
     
 
     command_data = command_line.split(" ")
     if len(command_data) == 0:
         st.write("Please enter commands set_user_id, upload_file, reply")
-    # st.write(f"Processing {command_line}")
+    
+    if streamlit_pdf is not None:
+        # For demonstration, assuming server expects multipart/form-data
+        files = {'file': (streamlit_pdf.name, streamlit_pdf, 'application/pdf')}
+        response = requests.post(f"http://{HOST}:{settings.FRONENT_PORT}/upload_file", files=files)
+        if response.status_code == 200:
+            st.success("File successfully uploaded to the server.")
+            st.session_state["filename"] = streamlit_pdf.name
+        else:
+            st.error("Failed to upload the file.")
+
     if st.button("Run"):
         if "upload_file" in command_line:
-            file_path = Path(command_data[-1])
-            if os.path.exists(file_path):
-                st.write("File exists")
-                with open(file_path, "rb") as f:
-                    file_content = f.read()
-                filename = os.path.basename(file_path)
-                if file_content is not None:
-                    files = {'file': (filename, file_content, 'application/pdf')}
-                    response = requests.post(f"http://{HOST}:{settings.FRONENT_PORT}/upload_file", files=files)
-                    st.session_state["filename"] = filename
-                    if response.status_code == 200:
-                        st.success("File successfully uploaded to the server.")
-                    else:
-                        st.error("Failed to upload the file.")
+            st.session_state["file_upload_visibility"] = True
+            st.session_state["streamlit_pdf"] = streamlit_pdf
+            st.rerun()
         elif "set_user_id" in command_line:
             user_id = command_data[-1]
             st.session_state["user_id"] = user_id
